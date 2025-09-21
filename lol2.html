@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stitches & Gauge — Premium Carpet Tile</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    :root{
+      --sg-ink:#101213;
+      --sg-accent:#fcd535;
+      --sg-muted:#6e747a;
+      --sg-cream:#f6f4ef;
+    }
+    html{scroll-behavior:smooth}
+    body{font-family: "Helvetica Neue", Arial, sans-serif; color:var(--sg-ink);}
+
+    /* NAV */
+    .navbar{backdrop-filter: blur(6px);}
+    .navbar-brand{font-weight:800; letter-spacing:.3px;}
+
+    /* HERO CAROUSEL */
+    .hero-slide{
+      min-height: 92vh;
+      position: relative;
+      display:flex; align-items:center; justify-content:center;
+      color:#fff; text-align:center;
+    }
+    .hero-slide::after{
+      content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.35));
+    }
+    .hero-slide > .container{position:relative; z-index:2}
+    .hero-title{font-size: clamp(2rem, 4vw + .5rem, 4rem); font-weight:800}
+    .btn-cta{background:var(--sg-accent); border:none; font-weight:800; padding:.9rem 1.3rem; border-radius:999px}
+
+    /* SECTION SHELLS */
+    section.section{padding:84px 0}
+    .section-title{font-weight:800; letter-spacing:-.2px}
+
+    /* COLLECTIONS CARDS */
+    .collection-card{border:0; border-radius:18px; overflow:hidden; box-shadow:0 12px 36px rgba(0,0,0,.08);}
+    .collection-card .ratio{background:#eee}
+    .badge-soon{background:var(--sg-ink); color:#fff; letter-spacing:.08em}
+
+    /* MINI REVEAL ANIMATIONS (no library) */
+    .reveal{opacity:0; transform:translateY(18px); transition:all .7s ease}
+    .reveal.show{opacity:1; transform:none}
+
+    /* GALLERY */
+    .gallery img{border-radius:14px; cursor:pointer}
+
+    /* FOOTER */
+    footer{background:#0f1113; color:#cfd3d9}
+
+    /* Utility */
+    .link-arrow::after{content:" →"; transition:transform .2s; display:inline-block}
+    .link-arrow:hover::after{transform:translateX(4px)}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Stitches&nbsp;&amp;&nbsp;Gauge</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="nav" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#collections">Collections</a></li>
+        <li class="nav-item"><a class="nav-link" href="#design">Design</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SLIDESHOW -->
+<header id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5200">
+  <div class="carousel-inner">
+    <!-- Slide 1 -->
+    <div class="carousel-item active">
+      <div class="hero-slide" style="background:url('assets/img/hero_main.jpg') center/cover no-repeat;">
+        <div class="container">
+          <h1 class="hero-title mb-3">Lasting Impressions</h1>
+          <p class="lead mb-4">Made to inspire. Made to last. Made for more.</p>
+          <a href="#collections" class="btn btn-cta">Explore Collections</a>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 2 -->
+    <div class="carousel-item">
+      <div class="hero-slide" style="background:url('assets/img/Gallery-22.png') center/cover no-repeat;">
+        <div class="container">
+          <h1 class="hero-title mb-3">Design with Purpose</h1>
+          <p class="lead mb-4">Textures, tones, and patterns that elevate every interior.</p>
+          <a href="#design" class="btn btn-outline-light">See Design Tools</a>
+        </div>
+      </div>
+    </div>
+    <!-- Slide 3 -->
+    <div class="carousel-item">
+      <div class="hero-slide" style="background:url('assets/img/Gallery-20.png') center/cover no-repeat;">
+        <div class="container">
+          <h1 class="hero-title mb-3">Performance You Can Feel</h1>
+          <p class="lead mb-4">Commercial-grade durability. Residential-grade comfort.</p>
+          <a href="#contact" class="btn btn-cta">Request Samples</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Previous">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</header>
+
+<!-- COLLECTIONS CAROUSEL -->
+<section id="collections" class="section bg-white">
+  <div class="container reveal">
+    <div class="d-flex align-items-end justify-content-between mb-4">
+      <div>
+        <h2 class="section-title mb-1">Carpet Tile Collections</h2>
+        <div class="text-muted">Timeless design. Commercial-grade performance.</div>
+      </div>
+      <a href="#contact" class="link-offset-2 link-underline link-underline-opacity-0 link-arrow d-none d-md-inline">Request samples</a>
+    </div>
+
+    <div id="collectionsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6800">
+      <div class="carousel-inner">
+
+        <!-- Slide A -->
+        <div class="carousel-item active">
+          <div class="row g-4">
+            <div class="col-md-4">
+              <article class="card collection-card h-100">
+                <div class="ratio ratio-4x3">
+                  <img src="assets/img/AccentHour_Charcoal_ASH-1_c634x488.webp" class="w-100 h-100 object-fit-cover" alt="Heritage Threads">
+                </div>
+                <div class="card-body">
+                  <h5 class="fw-bold mb-1">Heritage Threads</h5>
+                  <p class="text-secondary">Classic textures reimagined for modern spaces.</p>
+                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-4">
+              <article class="card collection-card h-100">
+                <div class="ratio ratio-4x3">
+                  <img src="assets/img/EarthenForms_Hearth-Gris_Ash_E611-Marble_c634x488.webp" class="w-100 h-100 object-fit-cover" alt="Modern Weave">
+                </div>
+                <div class="card-body">
+                  <h5 class="fw-bold mb-1">Modern Weave</h5>
+                  <p class="text-secondary">Bold pattern with timeless proportion.</p>
+                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-4">
+              <article class="card collection-card h-100">
+                <div class="ratio ratio-4x3">
+                  <img src="assets/img/Reeling_Sapphire_Level Set_Cool Polished Cement_ND_c960x960.webp" class="w-100 h-100 object-fit-cover" alt="Earthen Elegance">
+                </div>
+                <div class="card-body">
+                  <h5 class="fw-bold mb-1">Earthen Elegance</h5>
+                  <p class="text-secondary">Organic tones for warm, welcoming interiors.</p>
+                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide B -->
+        <div class="carousel-item">
+          <div class="row g-4">
+            <div class="col-md-4">
+              <article class="card collection-card h-100">
+                <div class="ratio ratio-4x3">
+                  <img src="assets/img/alpha-numeric.jpg" class="w-100 h-100 object-fit-cover" alt="Alpha Numeric">
+                </div>
+                <div class="card-body">
+                  <h5 class="fw-bold mb-1">Alpha Numeric <span class="text-muted fw-normal">SGT808</span></h5>
+                  <p class="text-secondary">Crisp geometry for modern zoning.</p>
+                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-4">
+              <article class="card collection-card h-100">
+                <div class="ratio ratio-4x3">
+                  <img src="assets/img/checks.jpg" class="w-100 h-100 object-fit-cover" alt="Checks">
+                </div>
+                <div class="card-body">
+                  <h5 class="fw-bold mb-1">Checks <span class="text-muted fw-normal">SGT705</span></h5>
+                  <p class="text-secondary">Soft plaid that layers with neutrals.</p>
+                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-4">
+              <article class="card collection-card h-100">
+                <div class="ratio ratio-4x3 position-relative">
+                  <img src="assets/img/peranakan.jpg" class="w-100 h-100 object-fit-cover" alt="Peranakan">
+                  <span class="badge badge-soon position-absolute top-0 start-0 m-2 px-3 py-2 rounded-pill">COMING SOON</span>
+                </div>
+                <div class="card-body">
+                  <h5 class="fw-bold mb-1">Peranakan <span class="text-muted fw-normal">SGT901/902/903</span></h5>
+                  <p class="text-secondary">Heritage motifs with a modern build.</p>
+                  <button class="btn btn-sm btn-outline-dark rounded-pill" disabled>Preview soon</button>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#collectionsCarousel" data-bs-slide="prev" aria-label="Prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#collectionsCarousel" data-bs-slide="next" aria-label="Next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN / INSPIRATION -->
+<section id="design" class="section" style="background:var(--sg-cream);">
+  <div class="container reveal">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <h2 class="section-title mb-3">Imagine the flooring possibilities</h2>
+        <p class="text-secondary mb-4">
+          Start with palette boards, then explore pattern sets—herringbone, monolithic, quarter-turn.
+          Our team advises on underlays, transitions, and site conditions for a flawless install.
+        </p>
+        <a href="#contact" class="btn btn-dark rounded-pill">Talk to a designer</a>
+      </div>
+      <div class="col-lg-6">
+        <img src="assets/img/floor-design-tool-homepage-mockup_c960x960.avif" class="img-fluid rounded-4 shadow" alt="Design tools mock">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY WITH LIGHTBOX -->
+<section id="gallery" class="section pt-0">
+  <div class="container reveal">
+    <h2 class="section-title mb-4">Gallery</h2>
+    <div class="row g-3">
+      <!-- 8 examples; duplicate/change as needed -->
+      <div class="col-6 col-md-3"><img src="assets/img/gallery-01.jpg" class="img-fluid w-100" alt="Install 1" data-bs-toggle="modal" data-bs-target="#lb1"></div>
+      <div class="col-6 col-md-3"><img src="assets/img/gallery-02.jpg" class="img-fluid w-100" alt="Install 2" data-bs-toggle="modal" data-bs-target="#lb2"></div>
+      <div class="col-6 col-md-3"><img src="assets/img/gallery-03.jpg" class="img-fluid w-100" alt="Install 3" data-bs-toggle="modal" data-bs-target="#lb3"></div>
+      <div class="col-6 col-md-3"><img src="assets/img/gallery-04.jpg" class="img-fluid w-100" alt="Install 4" data-bs-toggle="modal" data-bs-target="#lb4"></div>
+      <div class="col-6 col-md-3"><img src="assets/img/gallery-05.jpg" class="img-fluid w-100" alt="Install 5" data-bs-toggle="modal" data-bs-target="#lb5"></div>
+      <div class="col-6 col-md-3"><img src="assets/img/gallery-06.jpg" class="img-fluid w-100" alt="Install 6" data-bs-toggle="modal" data-bs-target="#lb6"></div>
+      <div class="col-6 col-md-3"><img src="assets/img/gallery-07.jpg" class="img-fluid w-100" alt="Install 7" data-bs-toggle="modal" data-bs-target="#lb7"></div>
+      <div class="col-6 col-md-3"><img src="assets/img/gallery-08.jpg" class="img-fluid w-100" alt="Install 8" data-bs-toggle="modal" data-bs-target="#lb8"></div>
+    </div>
+  </div>
+
+  <!-- Lightbox modals -->
+  <div class="modal fade" id="lb1" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-01.jpg" class="rounded-3" alt=""></div></div></div>
+  <div class="modal fade" id="lb2" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-02.jpg" class="rounded-3" alt=""></div></div></div>
+  <div class="modal fade" id="lb3" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-03.jpg" class="rounded-3" alt=""></div></div></div>
+  <div class="modal fade" id="lb4" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-04.jpg" class="rounded-3" alt=""></div></div></div>
+  <div class="modal fade" id="lb5" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-05.jpg" class="rounded-3" alt=""></div></div></div>
+  <div class="modal fade" id="lb6" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-06.jpg" class="rounded-3" alt=""></div></div></div>
+  <div class="modal fade" id="lb7" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-07.jpg" class="rounded-3" alt=""></div></div></div>
+  <div class="modal fade" id="lb8" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-08.jpg" class="rounded-3" alt=""></div></div></div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="section" style="background:#15181b;">
+  <div class="container text-white reveal">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <h2 class="section-title mb-3">Get in touch</h2>
+        <p class="text-light">Samples, quotes, technical specs — we’ve got you.</p>
+        <div class="d-grid gap-2 mt-4">
+          <a class="btn btn-light btn-lg" href="mailto:marketing.q@stitchesandgauge.com">marketing.q@stitchesandgauge.com</a>
+          <a class="btn btn-outline-light" href="tel:+6585302122">+65&nbsp;8530&nbsp;2122</a>
+          <a class="btn btn-success" href="https://wa.me/6585302122" target="_blank" rel="noopener">WhatsApp Us</a>
+        </div>
+        <div class="mt-4 text-secondary small">
+          5 Kaki Bukit Road 1, #03-05 Eunos Technolink, Singapore 415936
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <form class="p-4 bg-white rounded-4">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label">Name</label>
+              <input class="form-control" type="text" placeholder="Your name">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email</label>
+              <input class="form-control" type="email" placeholder="name@email.com">
+            </div>
+            <div class="col-12">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" rows="4" placeholder="How can we help?"></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-cta" type="button">Send enquiry</button>
+            </div>
+          </div>
+          <div class="form-text mt-2">* Wire this to your backend, Formspree, or Netlify Forms.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-4">
+  <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+    <div>© <span id="year"></span> Stitches & Gauge. All rights reserved.</div>
+    <div class="d-flex gap-3">
+      <a class="text-decoration-none text-secondary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a class="text-decoration-none text-secondary" href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Light scroll-reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const onScroll = () => {
+    const trigger = window.scrollY + window.innerHeight * 0.85;
+    reveals.forEach(el => { if (el.offsetTop < trigger) el.classList.add('show'); });
+  };
+  document.addEventListener('scroll', onScroll, {passive:true});
+  window.addEventListener('load', onScroll);
+</script>
+</body>
+</html>
