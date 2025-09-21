@@ -1,129 +1,155 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Stitches & Gauge — Carpet Tile</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stitches & Gauge — Future-Ready Carpets</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
-<style>
-  :root{
-    --ink:#0f1113; --muted:#6e747a; --cream:#f7f5f0; --line:#e9e7e2; --accent:#fcd535;
-  }
-  html{scroll-behavior:smooth}
-  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink)}
-  .container-xl{max-width:1240px}
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  /* Announcement */
-  .announce{background:#000;color:#fff;font-size:.92rem}
-  .announce a{color:#fff;text-decoration:underline;text-underline-offset:2px}
+  <style>
+    :root{
+      --bg:#0b0d10;         /* background */
+      --card:#0f1319;       /* card */
+      --text:#e8eef7;       /* main text */
+      --muted:#aab6c5;      /* muted text */
+      --accent:#7df9ff;     /* neon cyan */
+      --accent2:#b26dff;    /* neon violet */
+      --glass:rgba(255,255,255,.06);
+      --line:rgba(255,255,255,.08);
+      --cream:#11161c;      /* alt surface */
+    }
 
-  /* NAV + MEGA (desktop) */
-  .navbar{background:#fff}
-  .navbar-brand{font-weight:800; letter-spacing:.2px}
-  .nav-link{font-weight:600}
-  .dropdown-mega{position:static}
-  .dropdown-menu-mega{
-    border:0; border-top:1px solid var(--line); border-radius:0; padding:24px 0;
-  }
-  .dropdown-menu-mega .col{min-width:220px}
+    html,body{background:var(--bg); color:var(--text); font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    img{max-width:100%; height:auto; display:block}
+    .container-xl{max-width:1240px}
 
-  /* HERO */
-  .hero-slide{
-    min-height:92vh; position:relative; display:flex; align-items:center; color:#fff;
-    background-position:center; background-size:cover;
-  }
-  .hero-slide::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.25))}
-  .hero-slide .container-xl{position:relative; z-index:2}
-  .hero-title{font-weight:800; font-size: clamp(1.8rem, 4.5vw, 4rem)}
-  .hero-sub{max-width:720px}
-  .btn-cta{background:var(--accent); border:none; font-weight:800; border-radius:999px; padding:.9rem 1.25rem}
+    /* Background aura / particles */
+    body::before{
+      content:""; position:fixed; inset:-15vmax; z-index:-2;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(125,249,255,.07), transparent 35%),
+        radial-gradient(circle at 80% 90%, rgba(178,109,255,.08), transparent 40%),
+        repeating-radial-gradient(circle at 50% 50%, rgba(255,255,255,.02) 0 1px, transparent 1px 2px);
+      filter: blur(.3px);
+      animation: drift 26s linear infinite alternate;
+    }
+    @keyframes drift{from{transform:translate3d(-12px,-10px,0)}to{transform:translate3d(12px,10px,0)}}
 
-  /* Sections */
-  section.section{padding:84px 0}
-  .eyebrow{letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-size:.82rem}
-  .section-title{font-weight:800;letter-spacing:-.3px}
+    /* Announcement */
+    .announce{background:linear-gradient(90deg, rgba(125,249,255,.15), rgba(178,109,255,.15)); color:#d9f7ff}
 
-  /* Featured jumbo tiles */
-  .feature-card{
-    position:relative; min-height:420px; border-radius:18px; overflow:hidden; color:#fff;
-    background:#ddd center/cover no-repeat;
-  }
-  .feature-card::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.45))}
-  .feature-card .content{position:absolute; inset:auto 1.25rem 1.25rem 1.25rem; z-index:2}
-  .feature-card h3{font-weight:800}
+    /* NAV + MEGAMENU (desktop) */
+    .brand{font-family:Orbitron, Inter, sans-serif; letter-spacing:.5px}
+    .navbar{background:linear-gradient(to bottom, rgba(11,13,16,.92), rgba(11,13,16,.7)); border-bottom:1px solid var(--line); backdrop-filter:blur(8px) saturate(120%)}
+    .nav-link{color:var(--muted)!important; font-weight:600}
+    .nav-link:hover{color:var(--accent)!important}
+    .dropdown-mega{position:static}
+    .dropdown-menu-mega{border:0; border-top:1px solid var(--line); border-radius:0; padding:24px 0; background:rgba(17,22,28,.97);}
+    .dropdown-menu-mega .col{min-width:220px}
 
-  /* Segments */
-  .seg-card{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff}
-  .seg-card .ratio{background:#f2f2f0}
+    /* HERO */
+    .hero-slide{min-height:92vh; position:relative; display:flex; align-items:center; color:#fff; background:#000}
+    .hero-media{position:absolute; inset:0; z-index:-1; opacity:.45; filter:saturate(115%) contrast(105%) brightness(85%)}
+    .hero-overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,13,16,.35), rgba(11,13,16,.75)); z-index:0}
+    .scan{position:absolute; inset:0; pointer-events:none; background:linear-gradient(0deg, rgba(255,255,255,0) 45%, rgba(255,255,255,.05) 50%, rgba(255,255,255,0) 55%); background-size:100% 300%; animation:scan 7s ease-in-out infinite; mix-blend-mode:overlay}
+    @keyframes scan{0%{background-position:0 200%}100%{background-position:0 -200%}}
+    .hero-title{font-family:Orbitron, Inter, sans-serif; font-weight:800; font-size: clamp(1.8rem, 4.5vw, 4rem)}
+    .chip{display:inline-flex; gap:.5rem; align-items:center; padding:.42rem .8rem; border-radius:999px; font-size:.85rem; letter-spacing:.5px; border:1px solid rgba(125,249,255,.35); color:var(--accent); background:linear-gradient(180deg, rgba(125,249,255,.10), rgba(178,109,255,.10))}
+    .btn-neo{border:0; padding:.9rem 1.25rem; border-radius:14px; font-weight:800; color:#0b0d10; background:linear-gradient(90deg, var(--accent), var(--accent2)); box-shadow:0 10px 34px rgba(125,249,255,.25), inset 0 0 0 1px rgba(0,0,0,.12)}
+    .btn-neo:hover{transform:translateY(-1px); box-shadow:0 16px 44px rgba(178,109,255,.35)}
 
-  /* Sustainability */
-  .sust{background:var(--cream); border:1px solid var(--line); border-radius:16px}
-  .metric{background:#fff; border:1px solid var(--line); border-radius:14px}
+    /* Sections */
+    section.section{padding:84px 0}
+    .eyebrow{letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-size:.82rem}
+    .section-title{font-family:Orbitron, Inter, sans-serif; font-weight:800; letter-spacing:.6px; text-transform:uppercase}
+    .divider{height:2px; width:92px; border-radius:999px; background:linear-gradient(90deg, var(--accent), var(--accent2)); margin:12px 0 28px}
 
-  /* Stories */
-  .story-card{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff}
-  .story-card img{object-fit:cover; height:220px}
+    /* Feature tiles */
+    .feature-card{position:relative; min-height:420px; border-radius:18px; overflow:hidden; color:#fff; background:#222 center/cover no-repeat; border:1px solid var(--line)}
+    .feature-card::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.45))}
+    .feature-card .content{position:absolute; inset:auto 1.25rem 1.25rem 1.25rem; z-index:2}
 
-  /* Search overlay */
-  .search-overlay{
-    position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; z-index:1055;
-  }
-  .search-panel{
-    background:#fff; max-width:760px; margin:8vh auto; padding:28px; border-radius:14px;
-  }
-  .search-open .search-overlay{display:block}
+    /* Collections grid (cards) */
+    .neo-card{background:linear-gradient(180deg, var(--glass), rgba(255,255,255,.02)); border:1px solid var(--line); border-radius:18px; overflow:hidden; box-shadow:0 20px 40px rgba(0,0,0,.35); transform-style:preserve-3d; transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+    .neo-card:hover{border-color:rgba(125,249,255,.3); box-shadow:0 24px 60px rgba(178,109,255,.25)}
+    .neo-card .cover{height:260px; object-fit:cover; width:100%}
+    .tag{position:absolute; top:14px; left:14px; font-size:.75rem; padding:.36rem .62rem; border-radius:999px; color:#0b0d10; background:linear-gradient(90deg,var(--accent),var(--accent2)); font-weight:800}
+    .strip{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:10px}
+    .strip img{height:110px; object-fit:cover; border-radius:12px; opacity:.86; transition:opacity .2s}
+    .strip img:hover{opacity:1}
 
-  /* Sticky CTA */
-  .sticky-cta{ position:fixed; right:1rem; bottom:1rem; z-index:1100; }
+    /* Segments */
+    .seg-card{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01))}
 
-  /* Reveal */
-  .reveal{opacity:0; transform:translateY(18px); transition:all .7s ease}
-  .reveal.show{opacity:1; transform:none}
+    /* Sustainability metrics */
+    .sust{background:var(--cream); border:1px solid var(--line); border-radius:16px}
+    .metric{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border:1px solid var(--line); border-radius:14px; text-align:center; padding:18px}
+    .metric .num{font-family:Orbitron, Inter, sans-serif; font-weight:800; background:linear-gradient(90deg,var(--accent),var(--accent2)); -webkit-background-clip:text; background-clip:text; color:transparent; font-size:1.8rem}
 
-  /* Footer */
-  footer{background:#0f1113; color:#cfd3d9}
-  footer a{color:#cfd3d9;text-decoration:none}
-  footer a:hover{color:#fff}
+    /* Stories */
+    .story-card{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01))}
+    .story-card img{object-fit:cover; height:220px}
 
-  /* --- Mobile tweaks --- */
-  @media (max-width: 991.98px){
-    .dropdown-mega{display:none!important;}   /* hide desktop mega on mobile */
-    section.section{padding:64px 0}
-    .feature-card{min-height:320px}
-  }
-  @media (max-width: 575.98px){
-    .hero-slide{min-height:78vh}
-    .feature-card{min-height:260px}
-    .announce{font-size:.88rem}
-    .sticky-cta{right:.75rem; bottom:.75rem}
-  }
+    /* Search overlay */
+    .search-overlay{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; z-index:1055}
+    .search-panel{background:#0f1319; max-width:760px; margin:8vh auto; padding:28px; border-radius:14px; border:1px solid var(--line)}
+    .search-open .search-overlay{display:block}
 
-  /* Respect reduced motion */
-  @media (prefers-reduced-motion: reduce){
-    .carousel{transition:none!important}
-    .reveal{transition:none!important}
-  }
-</style>
+    /* Sticky CTA */
+    .sticky-cta{position:fixed; right:1rem; bottom:1rem; z-index:1100}
+
+    /* Reveal */
+    .reveal{opacity:0; transform:translateY(18px); transition: all .7s ease}
+    .reveal.show{opacity:1; transform:none}
+
+    /* Footer */
+    footer{background:#0b0f14; color:#cfd3d9}
+    footer a{color:#cfd3d9; text-decoration:none}
+    footer a:hover{color:#fff}
+
+    /* Mobile tweaks */
+    @media (max-width:991.98px){
+      .dropdown-mega{display:none!important}
+      section.section{padding:64px 0}
+      .feature-card{min-height:320px}
+    }
+    @media (max-width:575.98px){
+      .hero-slide{min-height:78vh}
+      .neo-card .cover{height:220px}
+      .strip img{height:90px}
+      .sticky-cta{right:.75rem; bottom:.75rem}
+    }
+
+    @media (prefers-reduced-motion:reduce){
+      .carousel{transition:none!important}
+      .reveal, .neo-card, .btn-neo{transition:none!important}
+      body::before, .scan{animation:none!important}
+    }
+  </style>
 </head>
 <body>
 
 <!-- Announcement -->
-<div class="announce py-2 text-center">
-  Now booking Q4 installs across SG & MY. <a href="#contact" class="ms-1">Talk to a project specialist →</a>
+<div class="announce py-2 text-center small">
+  Q4 installs open across SG & MY · <a href="#contact" class="text-decoration-underline">Book a project consult →</a>
 </div>
 
 <!-- NAV -->
-<nav class="navbar navbar-expand-lg sticky-top border-bottom">
+<nav class="navbar navbar-expand-lg sticky-top">
   <div class="container-xl">
-    <a class="navbar-brand" href="#">Stitches&nbsp;&amp;&nbsp;Gauge</a>
+    <a class="navbar-brand brand text-uppercase fw-bold text-light" href="#">Stitches&nbsp;&amp;&nbsp;Gauge</a>
 
     <!-- Mobile actions -->
     <div class="d-flex d-lg-none gap-2">
-      <button class="btn btn-outline-dark" id="btnSearch" aria-label="Search"><i class="bi bi-search"></i></button>
-      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Open menu">
+      <button class="btn btn-outline-info" id="btnSearch" aria-label="Search"><i class="bi bi-search"></i></button>
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav" aria-controls="mobileNav" aria-label="Open menu">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
@@ -140,40 +166,39 @@
                 <div class="col">
                   <div class="eyebrow mb-2">Featured</div>
                   <ul class="list-unstyled mb-0">
-                    <li><a class="link-dark text-decoration-none" href="#collections">Heritage Threads</a></li>
-                    <li><a class="link-dark text-decoration-none" href="#collections">Modern Weave</a></li>
-                    <li><a class="link-dark text-decoration-none" href="#collections">Earthen Elegance</a></li>
+                    <li><a class="link-light text-decoration-none" href="#collections">Dressed Lines™</a></li>
+                    <li><a class="link-light text-decoration-none" href="#collections">Past Forward™</a></li>
+                    <li><a class="link-light text-decoration-none" href="#collections">Earthen Forms™</a></li>
                   </ul>
                 </div>
                 <div class="col">
                   <div class="eyebrow mb-2">By Aesthetic</div>
                   <ul class="list-unstyled mb-0">
-                    <li><a class="link-dark text-decoration-none" href="#collections">Linear / Striated</a></li>
-                    <li><a class="link-dark text-decoration-none" href="#collections">Organic / Textural</a></li>
-                    <li><a class="link-dark text-decoration-none" href="#collections">Geometric</a></li>
+                    <li><a class="link-light text-decoration-none" href="#collections">Linear / Striated</a></li>
+                    <li><a class="link-light text-decoration-none" href="#collections">Organic / Textural</a></li>
+                    <li><a class="link-light text-decoration-none" href="#collections">Geometric</a></li>
                   </ul>
                 </div>
                 <div class="col">
                   <div class="eyebrow mb-2">By Performance</div>
                   <ul class="list-unstyled mb-0">
-                    <li><a class="link-dark text-decoration-none" href="#collections">High Traffic</a></li>
-                    <li><a class="link-dark text-decoration-none" href="#collections">Acoustic</a></li>
-                    <li><a class="link-dark text-decoration-none" href="#collections">Moisture Barrier</a></li>
+                    <li><a class="link-light text-decoration-none" href="#collections">High Traffic</a></li>
+                    <li><a class="link-light text-decoration-none" href="#collections">Acoustic</a></li>
+                    <li><a class="link-light text-decoration-none" href="#collections">Moisture Barrier</a></li>
                   </ul>
                 </div>
                 <div class="col">
                   <div class="eyebrow mb-2">Downloads</div>
                   <ul class="list-unstyled mb-0">
-                    <li><a class="link-dark text-decoration-none" href="#contact">Brochures</a></li>
-                    <li><a class="link-dark text-decoration-none" href="#contact">Spec Sheets</a></li>
-                    <li><a class="link-dark text-decoration-none" href="#contact">Cleaning & Care</a></li>
+                    <li><a class="link-light text-decoration-none" href="#contact">Brochures</a></li>
+                    <li><a class="link-light text-decoration-none" href="#contact">Spec Sheets</a></li>
+                    <li><a class="link-light text-decoration-none" href="#contact">Cleaning & Care</a></li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
         </li>
-
         <li class="nav-item"><a class="nav-link" href="#segments">Segments</a></li>
         <li class="nav-item"><a class="nav-link" href="#sustainability">Sustainability</a></li>
         <li class="nav-item"><a class="nav-link" href="#design">Design</a></li>
@@ -181,12 +206,8 @@
       </ul>
 
       <ul class="navbar-nav ms-auto align-items-center d-none d-lg-flex">
-        <li class="nav-item me-2">
-          <button class="btn btn-outline-dark" id="btnSearchDesktop" aria-label="Search"><i class="bi bi-search"></i></button>
-        </li>
-        <li class="nav-item">
-          <a href="#contact" class="btn btn-dark">Order Samples</a>
-        </li>
+        <li class="nav-item me-2"><button class="btn btn-outline-info" id="btnSearchDesktop" aria-label="Search"><i class="bi bi-search"></i></button></li>
+        <li class="nav-item"><a href="#contact" class="btn btn-neo">Order Samples</a></li>
       </ul>
     </div>
   </div>
@@ -204,54 +225,61 @@
     <a class="d-block mb-2" href="#sustainability" data-bs-dismiss="offcanvas">Sustainability</a>
     <a class="d-block mb-2" href="#design" data-bs-dismiss="offcanvas">Design</a>
     <a class="d-block mb-3" href="#stories" data-bs-dismiss="offcanvas">Inspiration</a>
-    <a class="btn btn-dark w-100" href="#contact" data-bs-dismiss="offcanvas">Order Samples</a>
+    <a class="btn btn-neo w-100" href="#contact" data-bs-dismiss="offcanvas">Order Samples</a>
   </div>
 </div>
 
-<!-- HERO (art-directed with <picture>) -->
+<!-- HERO CAROUSEL (Shaw/Interface structure, neon skin) -->
 <header id="hero" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5200" data-bs-touch="true">
   <div class="carousel-inner">
+    <!-- Slide 1 -->
     <div class="carousel-item active">
       <div class="hero-slide">
-        <picture>
-          <source media="(max-width: 575.98px)" srcset="assets/img/hero_main_mobile.jpg">
-          <img src="assets/img/hero_main.jpg" alt="Hero installation" class="w-100 h-100 position-absolute top-0 start-0" style="object-fit:cover" loading="eager">
+        <picture class="hero-media">
+          <source media="(max-width:575.98px)" srcset="assets/img/hero_main_mobile.jpg">
+          <img src="assets/img/hero_main.jpg" alt="Hero installation" class="w-100 h-100 position-absolute top-0 start-0" style="object-fit:cover">
         </picture>
-        <div class="container-xl">
+        <div class="hero-overlay"></div>
+        <div class="scan" aria-hidden="true"></div>
+        <div class="container-xl position-relative">
           <div class="eyebrow mb-2">Carpet Tile · Singapore</div>
           <h1 class="hero-title mb-3">Lasting Impressions</h1>
-          <p class="lead hero-sub mb-4">Design-led surfaces with commercial-grade performance.</p>
-          <a class="btn btn-cta" href="#collections">Explore Collections</a>
+          <p class="lead" style="max-width:720px">Design-led surfaces with commercial-grade performance.</p>
+          <a class="btn btn-neo mt-2" href="#collections">Explore Collections</a>
         </div>
       </div>
     </div>
-
+    <!-- Slide 2 -->
     <div class="carousel-item">
       <div class="hero-slide">
-        <picture>
-          <source media="(max-width: 575.98px)" srcset="assets/img/hero_alt_1_mobile.jpg">
-          <img src="assets/img/hero_alt_1.jpg" alt="Workplace design" class="w-100 h-100 position-absolute top-0 start-0" style="object-fit:cover" loading="lazy">
+        <picture class="hero-media">
+          <source media="(max-width:575.98px)" srcset="assets/img/hero_alt_1_mobile.jpg">
+          <img src="assets/img/hero_alt_1.jpg" alt="Workplace design" class="w-100 h-100 position-absolute top-0 start-0" style="object-fit:cover">
         </picture>
-        <div class="container-xl">
+        <div class="hero-overlay"></div>
+        <div class="scan" aria-hidden="true"></div>
+        <div class="container-xl position-relative">
           <div class="eyebrow mb-2">Workplace · Education · Healthcare</div>
           <h1 class="hero-title mb-3">Design with Purpose</h1>
-          <p class="lead hero-sub mb-4">Textures, tones and patterns for the spaces that matter.</p>
-          <a class="btn btn-outline-light" href="#segments">View Segments</a>
+          <p class="lead" style="max-width:720px">Textures, tones and patterns for the spaces that matter.</p>
+          <a class="btn btn-outline-info border-0 mt-2" href="#segments">View Segments</a>
         </div>
       </div>
     </div>
-
+    <!-- Slide 3 -->
     <div class="carousel-item">
       <div class="hero-slide">
-        <picture>
-          <source media="(max-width: 575.98px)" srcset="assets/img/hero_alt_2_mobile.jpg">
-          <img src="assets/img/hero_alt_2.jpg" alt="Sustainability" class="w-100 h-100 position-absolute top-0 start-0" style="object-fit:cover" loading="lazy">
+        <picture class="hero-media">
+          <source media="(max-width:575.98px)" srcset="assets/img/hero_alt_2_mobile.jpg">
+          <img src="assets/img/hero_alt_2.jpg" alt="Sustainability" class="w-100 h-100 position-absolute top-0 start-0" style="object-fit:cover">
         </picture>
-        <div class="container-xl">
+        <div class="hero-overlay"></div>
+        <div class="scan" aria-hidden="true"></div>
+        <div class="container-xl position-relative">
           <div class="eyebrow mb-2">Circular thinking</div>
           <h1 class="hero-title mb-3">Sustainability in Action</h1>
-          <p class="lead hero-sub mb-4">Durable materials. Responsible choices.</p>
-          <a class="btn btn-cta" href="#sustainability">See our approach</a>
+          <p class="lead" style="max-width:720px">Durable materials. Responsible choices.</p>
+          <a class="btn btn-neo mt-2" href="#sustainability">See our approach</a>
         </div>
       </div>
     </div>
@@ -260,75 +288,123 @@
   <button class="carousel-control-next" type="button" data-bs-target="#hero" data-bs-slide="next" aria-label="Next slide"><span class="carousel-control-next-icon"></span></button>
 </header>
 
-<!-- FEATURED COLLECTIONS -->
+<!-- FEATURED COLLECTIONS (jumbo feature tiles like Shaw/Interface) -->
 <section id="collections" class="section">
   <div class="container-xl reveal">
     <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-4">
       <div class="mb-2 mb-md-0">
         <div class="eyebrow">Collections</div>
         <h2 class="section-title mb-1">Featured Carpet Tiles</h2>
-        <div class="text-muted">Timeless design, made to perform.</div>
+        <div class="text-secondary">Timeless design, made to perform.</div>
       </div>
-      <a class="link-dark text-decoration-none" href="#contact">Request brochures →</a>
+      <a class="link-info text-decoration-none" href="#contact">Request brochures →</a>
     </div>
 
     <div class="row g-4">
       <div class="col-lg-6">
         <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-heritage.jpg')">
           <div class="content">
-            <h3>Heritage Threads</h3>
+            <h3 class="h3">Dressed Lines™</h3>
             <p class="mb-3">Classic tactility, contemporary palettes.</p>
-            <span class="btn btn-light btn-sm rounded-pill">View / sample</span>
+            <span class="btn btn-outline-light btn-sm rounded-pill">View / sample</span>
           </div>
         </a>
       </div>
       <div class="col-lg-6">
         <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-modern.jpg')">
           <div class="content">
-            <h3>Modern Weave</h3>
+            <h3 class="h3">Past Forward™</h3>
             <p class="mb-3">Clean geometry for crisp layouts.</p>
-            <span class="btn btn-light btn-sm rounded-pill">View / sample</span>
+            <span class="btn btn-outline-light btn-sm rounded-pill">View / sample</span>
           </div>
         </a>
       </div>
       <div class="col-lg-4">
         <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-earthen.jpg')">
           <div class="content">
-            <h3>Earthen Elegance</h3>
-            <span class="btn btn-light btn-sm rounded-pill mt-2">View / sample</span>
+            <h3 class="h4">Earthen Forms™</h3>
+            <span class="btn btn-outline-light btn-sm rounded-pill mt-2">View / sample</span>
           </div>
         </a>
       </div>
       <div class="col-lg-4">
         <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-linear.jpg')">
           <div class="content">
-            <h3>Linear / Striated</h3>
-            <span class="btn btn-light btn-sm rounded-pill mt-2">Explore</span>
+            <h3 class="h4">Linear / Striated</h3>
+            <span class="btn btn-outline-light btn-sm rounded-pill mt-2">Explore</span>
           </div>
         </a>
       </div>
       <div class="col-lg-4">
         <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-peranakan.jpg')">
           <div class="content">
-            <h3>Peranakan (Soon)</h3>
-            <span class="btn btn-light btn-sm rounded-pill mt-2">Notify me</span>
+            <h3 class="h4">Peranakan (Soon)</h3>
+            <span class="btn btn-outline-light btn-sm rounded-pill mt-2">Notify me</span>
           </div>
         </a>
       </div>
     </div>
+
+    <!-- Optional: 3-card product row with strips (keeps your futuristic vibe) -->
+    <div class="row g-4 mt-1">
+      <div class="col-md-4">
+        <article class="neo-card position-relative h-100">
+          <span class="tag">New</span>
+          <img class="cover" src="assets/img/cat_dressed-lines.jpg" alt="Dressed Lines collection">
+          <div class="p-3 p-lg-4">
+            <h5 class="mb-1">Dressed Lines™</h5>
+            <p class="mb-3 text-secondary">Sharp geometrics meet plush comfort—post-modern lines with rich depth.</p>
+            <div class="strip">
+              <img src="assets/img/product_dressed-lines_01.jpg" alt="" loading="lazy">
+              <img src="assets/img/product_dressed-lines_02.jpg" alt="" loading="lazy">
+              <img src="assets/img/product_dressed-lines_03.jpg" alt="" loading="lazy">
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="neo-card position-relative h-100">
+          <img class="cover" src="assets/img/cat_past-forward.jpg" alt="Past Forward collection">
+          <div class="p-3 p-lg-4">
+            <h5 class="mb-1">Past Forward™</h5>
+            <p class="mb-3 text-secondary">Mid-century motifs re-imagined with high-wear tech yarns.</p>
+            <div class="strip">
+              <img src="assets/img/product_past-forward_01.jpg" alt="" loading="lazy">
+              <img src="assets/img/product_past-forward_02.jpg" alt="" loading="lazy">
+              <img src="assets/img/product_past-forward_03.jpg" alt="" loading="lazy">
+            </div>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-4">
+        <article class="neo-card position-relative h-100">
+          <img class="cover" src="assets/img/cat_earthen-forms.jpg" alt="Earthen Forms collection">
+          <div class="p-3 p-lg-4">
+            <h5 class="mb-1">Earthen Forms™</h5>
+            <p class="mb-3 text-secondary">Organic, mineral palettes that warm up collaboration spaces.</p>
+            <div class="strip">
+              <img src="assets/img/product_earthen-forms_01.jpg" alt="" loading="lazy">
+              <img src="assets/img/product_earthen-forms_02.jpg" alt="" loading="lazy">
+              <img src="assets/img/product_earthen-forms_03.jpg" alt="" loading="lazy">
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+
   </div>
 </section>
 
-<!-- SEGMENTS -->
+<!-- SEGMENTS (markets) -->
 <section id="segments" class="section" style="background:var(--cream)">
   <div class="container-xl reveal">
     <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-4">
       <div class="mb-2 mb-md-0">
         <div class="eyebrow">Segments</div>
         <h2 class="section-title mb-1">Solutions by Space</h2>
-        <div class="text-muted">Made for the way you work, learn and heal.</div>
+        <div class="text-secondary">Made for the way you work, learn and heal.</div>
       </div>
-      <a class="link-dark text-decoration-none" href="#contact">Ask a segment specialist →</a>
+      <a class="link-info text-decoration-none" href="#contact">Ask a segment specialist →</a>
     </div>
 
     <div class="row g-4">
@@ -337,8 +413,8 @@
           <div class="ratio ratio-4x3"><img src="assets/img/seg-workplace.jpg" class="w-100 h-100 object-fit-cover" alt="Workplace" loading="lazy"></div>
           <div class="p-3">
             <h5 class="mb-1">Workplace</h5>
-            <p class="mb-2 text-muted">Zoning, acoustics, resilience.</p>
-            <a href="#contact" class="link-dark text-decoration-none">Discuss →</a>
+            <p class="mb-2 text-secondary">Zoning, acoustics, resilience.</p>
+            <a href="#contact" class="link-info text-decoration-none">Discuss →</a>
           </div>
         </article>
       </div>
@@ -347,8 +423,8 @@
           <div class="ratio ratio-4x3"><img src="assets/img/seg-education.jpg" class="w-100 h-100 object-fit-cover" alt="Education" loading="lazy"></div>
           <div class="p-3">
             <h5 class="mb-1">Education</h5>
-            <p class="mb-2 text-muted">Durable, easy to maintain.</p>
-            <a href="#contact" class="link-dark text-decoration-none">Discuss →</a>
+            <p class="mb-2 text-secondary">Durable, easy to maintain.</p>
+            <a href="#contact" class="link-info text-decoration-none">Discuss →</a>
           </div>
         </article>
       </div>
@@ -357,8 +433,8 @@
           <div class="ratio ratio-4x3"><img src="assets/img/seg-healthcare.jpg" class="w-100 h-100 object-fit-cover" alt="Healthcare" loading="lazy"></div>
           <div class="p-3">
             <h5 class="mb-1">Healthcare</h5>
-            <p class="mb-2 text-muted">Comfort + performance.</p>
-            <a href="#contact" class="link-dark text-decoration-none">Discuss →</a>
+            <p class="mb-2 text-secondary">Comfort + performance.</p>
+            <a href="#contact" class="link-info text-decoration-none">Discuss →</a>
           </div>
         </article>
       </div>
@@ -367,8 +443,8 @@
           <div class="ratio ratio-4x3"><img src="assets/img/seg-hospitality.jpg" class="w-100 h-100 object-fit-cover" alt="Hospitality" loading="lazy"></div>
           <div class="p-3">
             <h5 class="mb-1">Hospitality</h5>
-            <p class="mb-2 text-muted">Warmth, tone, durability.</p>
-            <a href="#contact" class="link-dark text-decoration-none">Discuss →</a>
+            <p class="mb-2 text-secondary">Warmth, tone, durability.</p>
+            <a href="#contact" class="link-info text-decoration-none">Discuss →</a>
           </div>
         </article>
       </div>
@@ -376,52 +452,52 @@
   </div>
 </section>
 
-<!-- SUSTAINABILITY -->
+<!-- SUSTAINABILITY BAND -->
 <section id="sustainability" class="section">
   <div class="container-xl reveal">
     <div class="row g-4 align-items-center sust p-4 p-md-5">
       <div class="col-lg-5">
         <div class="eyebrow mb-2">Sustainability</div>
         <h2 class="section-title mb-3">Design better, build responsibly.</h2>
-        <p class="text-muted mb-4">From recycled content to end-of-life take-back, our products are engineered with longevity and circularity in mind.</p>
-        <a href="#contact" class="btn btn-dark rounded-pill">Get documentation</a>
+        <p class="text-secondary mb-4">From recycled content to end-of-life take-back, our products are engineered with longevity and circularity in mind.</p>
+        <a href="#contact" class="btn btn-neo">Get documentation</a>
       </div>
       <div class="col-lg-7">
         <div class="row g-3">
-          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">35%</div><div class="small text-muted">Recycled content*</div></div></div>
-          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">≤ VOC</div><div class="small text-muted">Low emissions</div></div></div>
-          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">Take-back</div><div class="small text-muted">Program ready</div></div></div>
-          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">7-yr</div><div class="small text-muted">Commercial warranty</div></div></div>
-          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">Acoustic</div><div class="small text-muted">Improved dB</div></div></div>
-          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">Slip</div><div class="small text-muted">R10 / R11 options</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric"><div class="num">35%</div><div class="text-secondary">Recycled content*</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric"><div class="num">≤ VOC</div><div class="text-secondary">Low emissions</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric"><div class="num">Take-back</div><div class="text-secondary">Program ready</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric"><div class="num">7-yr</div><div class="text-secondary">Commercial warranty</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric"><div class="num">Acoustic</div><div class="text-secondary">Improved dB</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric"><div class="num">Slip</div><div class="text-secondary">R10 / R11 options</div></div></div>
         </div>
-        <div class="small text-muted mt-2">*Varies by collection and batch. Request spec sheets.</div>
+        <div class="small text-secondary mt-2">*Varies by collection and batch. Request spec sheets.</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- DESIGN TOOLS -->
+<!-- DESIGN TOOLS PROMO -->
 <section id="design" class="section" style="background:var(--cream)">
   <div class="container-xl reveal">
     <div class="row g-4 align-items-center">
       <div class="col-lg-6">
-        <div class="eyebrow mb-2">Design Tools</div>
+        <div class="eyebrow mb-2">Design Lab</div>
         <h2 class="section-title mb-3">Imagine the flooring possibilities</h2>
-        <p class="text-muted mb-4">Try herringbone, monolithic or quarter-turn patterns. We’ll advise on transitions, underlays and site conditions for a flawless install.</p>
+        <p class="text-secondary mb-4">Try herringbone, ashlar or quarter-turn patterns. We’ll advise on transitions, underlays and site conditions for a flawless install.</p>
         <div class="d-flex flex-wrap gap-2">
-          <a href="#contact" class="btn btn-dark rounded-pill">Talk to a designer</a>
-          <a href="#contact" class="btn btn-outline-dark rounded-pill">Request palette board</a>
+          <a href="#contact" class="btn btn-neo">Talk to a designer</a>
+          <a href="#contact" class="btn btn-outline-info border-0">Request palette board</a>
         </div>
       </div>
       <div class="col-lg-6">
-        <img src="assets/img/design-tools.jpg" class="img-fluid rounded-4 shadow" alt="Design tools mock" loading="lazy">
+        <img src="assets/img/design-tools.jpg" class="img-fluid rounded-4 neo-card p-0" alt="Design tools mock" loading="lazy">
       </div>
     </div>
   </div>
 </section>
 
-<!-- STORIES (cards in carousel; stacks on mobile) -->
+<!-- INSPIRATION STORIES (carousel of cards) -->
 <section id="stories" class="section pt-0">
   <div class="container-xl reveal">
     <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-4">
@@ -430,8 +506,8 @@
         <h2 class="section-title mb-1">Projects & Stories</h2>
       </div>
       <div class="d-none d-md-flex gap-2">
-        <button class="btn btn-outline-dark btn-sm" data-bs-target="#storiesCarousel" data-bs-slide="prev" aria-label="Prev"><i class="bi bi-arrow-left"></i></button>
-        <button class="btn btn-outline-dark btn-sm" data-bs-target="#storiesCarousel" data-bs-slide="next" aria-label="Next"><i class="bi bi-arrow-right"></i></button>
+        <button class="btn btn-outline-info btn-sm" data-bs-target="#storiesCarousel" data-bs-slide="prev" aria-label="Prev"><i class="bi bi-arrow-left"></i></button>
+        <button class="btn btn-outline-info btn-sm" data-bs-target="#storiesCarousel" data-bs-slide="next" aria-label="Next"><i class="bi bi-arrow-right"></i></button>
       </div>
     </div>
 
@@ -444,8 +520,8 @@
                 <img src="assets/img/story-01.jpg" class="w-100" alt="Co-working interior" loading="lazy">
                 <div class="p-3">
                   <h5 class="fw-bold">Co-working in Tanjong Pagar</h5>
-                  <p class="text-muted mb-2">Zoning with striated tiles and warm palettes.</p>
-                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
+                  <p class="text-secondary mb-2">Zoning with striated tiles and warm palettes.</p>
+                  <a href="#contact" class="link-info text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
@@ -454,8 +530,8 @@
                 <img src="assets/img/story-02.jpg" class="w-100" alt="School library interior" loading="lazy">
                 <div class="p-3">
                   <h5 class="fw-bold">Primary school library</h5>
-                  <p class="text-muted mb-2">Acoustic comfort for quiet corners.</p>
-                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
+                  <p class="text-secondary mb-2">Acoustic comfort for quiet corners.</p>
+                  <a href="#contact" class="link-info text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
@@ -464,8 +540,8 @@
                 <img src="assets/img/story-03.jpg" class="w-100" alt="Clinic reception interior" loading="lazy">
                 <div class="p-3">
                   <h5 class="fw-bold">Clinic reception</h5>
-                  <p class="text-muted mb-2">Hygienic surfaces, calm textures.</p>
-                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
+                  <p class="text-secondary mb-2">Hygienic surfaces, calm textures.</p>
+                  <a href="#contact" class="link-info text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
@@ -479,8 +555,8 @@
                 <img src="assets/img/story-04.jpg" class="w-100" alt="Retail concept interior" loading="lazy">
                 <div class="p-3">
                   <h5 class="fw-bold">Retail concept</h5>
-                  <p class="text-muted mb-2">Directional layouts to guide flow.</p>
-                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
+                  <p class="text-secondary mb-2">Directional layouts to guide flow.</p>
+                  <a href="#contact" class="link-info text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
@@ -489,8 +565,8 @@
                 <img src="assets/img/story-05.jpg" class="w-100" alt="Hospitality lounge" loading="lazy">
                 <div class="p-3">
                   <h5 class="fw-bold">Hospitality lounge</h5>
-                  <p class="text-muted mb-2">Warm tones, easy maintenance.</p>
-                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
+                  <p class="text-secondary mb-2">Warm tones, easy maintenance.</p>
+                  <a href="#contact" class="link-info text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
@@ -499,8 +575,8 @@
                 <img src="assets/img/story-06.jpg" class="w-100" alt="Meeting suite interior" loading="lazy">
                 <div class="p-3">
                   <h5 class="fw-bold">Meeting suite</h5>
-                  <p class="text-muted mb-2">Premium, quiet underfoot.</p>
-                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
+                  <p class="text-secondary mb-2">Premium, quiet underfoot.</p>
+                  <a href="#contact" class="link-info text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
@@ -513,16 +589,16 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section" style="background:#15181b;">
+<section id="contact" class="section" style="background:#0b0f14">
   <div class="container-xl text-white reveal">
     <div class="row g-4">
       <div class="col-lg-6">
         <div class="eyebrow mb-2 text-secondary">Contact</div>
         <h2 class="section-title mb-3">Get in touch</h2>
-        <p class="text-light">Samples, quotes, technical specs — we’ve got you.</p>
+        <p class="text-secondary">Samples, quotes, technical specs — we’ve got you.</p>
         <div class="d-grid gap-2 mt-4">
-          <a class="btn btn-light btn-lg" href="mailto:marketing.q@stitchesandgauge.com">marketing.q@stitchesandgauge.com</a>
-          <a class="btn btn-outline-light" href="tel:+6585302122">+65&nbsp;8530&nbsp;2122</a>
+          <a class="btn btn-neo btn-lg" href="mailto:marketing.q@stitchesandgauge.com">marketing.q@stitchesandgauge.com</a>
+          <a class="btn btn-outline-info border-0" href="tel:+6585302122">+65&nbsp;8530&nbsp;2122</a>
           <a class="btn btn-success" href="https://wa.me/6585302122" target="_blank" rel="noopener">WhatsApp Us</a>
         </div>
         <div class="mt-4 text-secondary small">
@@ -530,45 +606,45 @@
         </div>
       </div>
       <div class="col-lg-6">
-        <form class="p-4 bg-white rounded-4">
+        <form class="p-4 neo-card">
           <div class="row g-3">
             <div class="col-md-6">
               <label class="form-label">Name</label>
-              <input class="form-control" type="text" placeholder="Your name">
+              <input class="form-control bg-dark text-light border-0" type="text" placeholder="Your name">
             </div>
             <div class="col-md-6">
               <label class="form-label">Email</label>
-              <input class="form-control" type="email" placeholder="name@email.com">
+              <input class="form-control bg-dark text-light border-0" type="email" placeholder="name@email.com">
             </div>
             <div class="col-12">
               <label class="form-label">Message</label>
-              <textarea class="form-control" rows="4" placeholder="How can we help?"></textarea>
+              <textarea class="form-control bg-dark text-light border-0" rows="4" placeholder="How can we help?"></textarea>
             </div>
             <div class="col-12">
-              <button class="btn btn-cta" type="button">Send enquiry</button>
+              <button class="btn btn-neo" type="button">Send enquiry</button>
             </div>
           </div>
-          <div class="form-text mt-2 text-muted">* Wire this to your backend, Formspree, or Netlify Forms.</div>
+          <div class="form-text mt-2 text-secondary">* Wire this to your backend, Formspree, or Netlify Forms.</div>
         </form>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Sticky CTA (hidden on very small screens if it gets in the way) -->
+<!-- Sticky CTA -->
 <div class="sticky-cta d-none d-sm-block">
-  <a href="#contact" class="btn btn-dark btn-lg rounded-pill"><i class="bi bi-box-seam me-2"></i>Order Samples</a>
+  <a href="#contact" class="btn btn-neo btn-lg rounded-pill"><i class="bi bi-box-seam me-2"></i>Order Samples</a>
 </div>
 
 <!-- SEARCH OVERLAY -->
 <div class="search-overlay" aria-hidden="true">
   <div class="search-panel mx-3 mx-md-auto">
     <div class="d-flex align-items-center gap-2 mb-3">
-      <i class="bi bi-search"></i>
-      <input type="search" class="form-control form-control-lg border-0" placeholder="Search collections, segments, specs…" aria-label="Search site" autofocus>
-      <button class="btn btn-outline-dark" id="closeSearch" aria-label="Close search"><i class="bi bi-x-lg"></i></button>
+      <i class="bi bi-search text-info"></i>
+      <input type="search" class="form-control form-control-lg bg-dark text-light border-0" placeholder="Search collections, segments, specs…" aria-label="Search site" autofocus>
+      <button class="btn btn-outline-info" id="closeSearch" aria-label="Close search"><i class="bi bi-x-lg"></i></button>
     </div>
-    <div class="row g-3 small text-muted">
+    <div class="row g-3 small text-secondary">
       <div class="col-md-4">
         <div class="fw-semibold">Popular searches</div>
         <ul class="mt-2 mb-0 ps-3">
@@ -596,7 +672,7 @@
   <div class="container-xl">
     <div class="row g-4">
       <div class="col-md-4">
-        <h5 class="fw-bold">Stitches & Gauge</h5>
+        <h5 class="fw-bold brand">Stitches & Gauge</h5>
         <p class="text-secondary">Design-led carpet tiles for modern interiors across Singapore & Malaysia.</p>
       </div>
       <div class="col-6 col-md-2">
@@ -620,8 +696,8 @@
         <div class="fw-semibold mb-2">Stay in the loop</div>
         <form class="d-flex gap-2">
           <label for="nl" class="visually-hidden">Email</label>
-          <input id="nl" class="form-control" type="email" placeholder="Email address">
-          <button class="btn btn-light">Join</button>
+          <input id="nl" class="form-control bg-dark text-light border-0" type="email" placeholder="Email address">
+          <button class="btn btn-outline-info border-0">Join</button>
         </form>
         <div class="mt-3 d-flex gap-3">
           <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
@@ -653,7 +729,7 @@
   document.addEventListener('scroll', onScroll, {passive:true});
   window.addEventListener('load', onScroll);
 
-  // Search overlay (null-safe)
+  // Search overlay
   const body = document.body;
   const openers = [document.getElementById('btnSearch'), document.getElementById('btnSearchDesktop')].filter(Boolean);
   const closer = document.getElementById('closeSearch');
