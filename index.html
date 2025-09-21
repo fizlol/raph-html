@@ -1,221 +1,472 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stitches & Gauge — Premium Carpet Tile</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Stitches & Gauge — Carpet Tile</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  <style>
-    :root{
-      --sg-ink:#101213;
-      --sg-accent:#fcd535;
-      --sg-muted:#6e747a;
-      --sg-cream:#f6f4ef;
-    }
-    html{scroll-behavior:smooth}
-    body{font-family: "Helvetica Neue", Arial, sans-serif; color:var(--sg-ink);}
+<style>
+  :root{
+    --ink:#0f1113; --muted:#6e747a; --cream:#f7f5f0; --line:#e9e7e2; --accent:#fcd535;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;color:var(--ink)}
+  .container-xl{max-width:1240px}
 
-    /* NAV */
-    .navbar{backdrop-filter: blur(6px);}
-    .navbar-brand{font-weight:800; letter-spacing:.3px;}
+  /* Announcement bar */
+  .announce{background:#000;color:#fff;font-size:.9rem}
+  .announce a{color:#fff;text-decoration:underline;text-underline-offset:2px}
 
-    /* HERO CAROUSEL */
-    .hero-slide{
-      min-height: 92vh;
-      position: relative;
-      display:flex; align-items:center; justify-content:center;
-      color:#fff; text-align:center;
-    }
-    .hero-slide::after{
-      content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.35));
-    }
-    .hero-slide > .container{position:relative; z-index:2}
-    .hero-title{font-size: clamp(2rem, 4vw + .5rem, 4rem); font-weight:800}
-    .btn-cta{background:var(--sg-accent); border:none; font-weight:800; padding:.9rem 1.3rem; border-radius:999px}
+  /* NAV + MEGAMENU */
+  .navbar{background:#fff}
+  .navbar-brand{font-weight:800; letter-spacing:.2px}
+  .nav-link{font-weight:600}
+  .dropdown-mega{position:static}
+  .dropdown-menu-mega{
+    border:0; border-top:1px solid var(--line); border-radius:0; padding:24px 0;
+  }
+  .dropdown-menu-mega .col{min-width:220px}
 
-    /* SECTION SHELLS */
-    section.section{padding:84px 0}
-    .section-title{font-weight:800; letter-spacing:-.2px}
+  /* HERO */
+  .hero-slide{
+    min-height:92vh; position:relative; display:flex; align-items:center; color:#fff;
+    background-position:center; background-size:cover;
+  }
+  .hero-slide::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.25))}
+  .hero-slide .container-xl{position:relative; z-index:2}
+  .hero-title{font-weight:800; font-size: clamp(2rem, 4.2vw, 4rem)}
+  .btn-cta{background:var(--accent); border:none; font-weight:800; border-radius:999px; padding:.9rem 1.25rem}
 
-    /* COLLECTIONS CARDS */
-    .collection-card{border:0; border-radius:18px; overflow:hidden; box-shadow:0 12px 36px rgba(0,0,0,.08);}
-    .collection-card .ratio{background:#eee}
-    .badge-soon{background:var(--sg-ink); color:#fff; letter-spacing:.08em}
+  /* Section shells */
+  section.section{padding:84px 0}
+  .eyebrow{letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-size:.82rem}
+  .section-title{font-weight:800;letter-spacing:-.3px}
 
-    /* MINI REVEAL ANIMATIONS (no library) */
-    .reveal{opacity:0; transform:translateY(18px); transition:all .7s ease}
-    .reveal.show{opacity:1; transform:none}
+  /* Featured jumbo tiles */
+  .feature-card{
+    position:relative; min-height:420px; border-radius:18px; overflow:hidden; color:#fff;
+    background:#ddd center/cover no-repeat;
+  }
+  .feature-card::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.2), rgba(0,0,0,.45))}
+  .feature-card .content{position:absolute; inset:auto 1.25rem 1.25rem 1.25rem; z-index:2}
+  .feature-card h3{font-weight:800}
 
-    /* GALLERY */
-    .gallery img{border-radius:14px; cursor:pointer}
+  /* Segments */
+  .seg-card{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff}
+  .seg-card .ratio{background:#f2f2f0}
 
-    /* FOOTER */
-    footer{background:#0f1113; color:#cfd3d9}
+  /* Sustainability */
+  .sust{background:var(--cream); border:1px solid var(--line); border-radius:16px}
+  .metric{background:#fff; border:1px solid var(--line); border-radius:14px}
 
-    /* Utility */
-    .link-arrow::after{content:" →"; transition:transform .2s; display:inline-block}
-    .link-arrow:hover::after{transform:translateX(4px)}
-  </style>
+  /* Stories slider (cards) */
+  .story-card{border:1px solid var(--line); border-radius:16px; overflow:hidden; background:#fff}
+  .story-card img{object-fit:cover; height:220px}
+
+  /* Search overlay */
+  .search-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; z-index:1055;
+  }
+  .search-panel{
+    background:#fff; max-width:760px; margin:8vh auto; padding:28px; border-radius:14px;
+  }
+  .search-open .search-overlay{display:block}
+
+  /* Sticky CTA */
+  .sticky-cta{
+    position:fixed; right:1rem; bottom:1rem; z-index:1100;
+  }
+
+  /* Reveal */
+  .reveal{opacity:0; transform:translateY(18px); transition:all .7s ease}
+  .reveal.show{opacity:1; transform:none}
+
+  /* Footer */
+  footer{background:#0f1113; color:#cfd3d9}
+  footer a{color:#cfd3d9;text-decoration:none}
+  footer a:hover{color:#fff}
+</style>
 </head>
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-white shadow-sm fixed-top">
-  <div class="container">
+<!-- Announcement -->
+<div class="announce py-2 text-center">
+  Now booking Q4 installs across SG & MY. <a href="#contact" class="ms-1">Talk to a project specialist →</a>
+</div>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg sticky-top border-bottom">
+  <div class="container-xl">
     <a class="navbar-brand" href="#">Stitches&nbsp;&amp;&nbsp;Gauge</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div id="nav" class="collapse navbar-collapse">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="#collections">Collections</a></li>
+    <div class="d-flex d-lg-none gap-2">
+      <button class="btn btn-outline-dark" id="btnSearch" aria-label="Search"><i class="bi bi-search"></i></button>
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-3">
+        <!-- Mega menu: Collections -->
+        <li class="nav-item dropdown dropdown-mega">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Collections</a>
+          <div class="dropdown-menu dropdown-menu-mega w-100">
+            <div class="container-xl">
+              <div class="row g-4">
+                <div class="col">
+                  <div class="eyebrow mb-2">Featured</div>
+                  <ul class="list-unstyled">
+                    <li><a class="link-dark text-decoration-none" href="#collections">Heritage Threads</a></li>
+                    <li><a class="link-dark text-decoration-none" href="#collections">Modern Weave</a></li>
+                    <li><a class="link-dark text-decoration-none" href="#collections">Earthen Elegance</a></li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <div class="eyebrow mb-2">By Aesthetic</div>
+                  <ul class="list-unstyled">
+                    <li><a class="link-dark text-decoration-none" href="#collections">Linear / Striated</a></li>
+                    <li><a class="link-dark text-decoration-none" href="#collections">Organic / Textural</a></li>
+                    <li><a class="link-dark text-decoration-none" href="#collections">Geometric</a></li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <div class="eyebrow mb-2">By Performance</div>
+                  <ul class="list-unstyled">
+                    <li><a class="link-dark text-decoration-none" href="#collections">High Traffic</a></li>
+                    <li><a class="link-dark text-decoration-none" href="#collections">Acoustic</a></li>
+                    <li><a class="link-dark text-decoration-none" href="#collections">Moisture Barrier</a></li>
+                  </ul>
+                </div>
+                <div class="col">
+                  <div class="eyebrow mb-2">Downloads</div>
+                  <ul class="list-unstyled">
+                    <li><a class="link-dark text-decoration-none" href="#contact">Brochures</a></li>
+                    <li><a class="link-dark text-decoration-none" href="#contact">Spec Sheets</a></li>
+                    <li><a class="link-dark text-decoration-none" href="#contact">Cleaning & Care</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="#segments">Segments</a></li>
+        <li class="nav-item"><a class="nav-link" href="#sustainability">Sustainability</a></li>
         <li class="nav-item"><a class="nav-link" href="#design">Design</a></li>
-        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
-        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="#stories">Inspiration</a></li>
+      </ul>
+
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item me-2 d-none d-lg-block">
+          <button class="btn btn-outline-dark" id="btnSearchDesktop" aria-label="Search"><i class="bi bi-search"></i></button>
+        </li>
+        <li class="nav-item">
+          <a href="#contact" class="btn btn-dark">Order Samples</a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<!-- HERO SLIDESHOW -->
-<header id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5200">
+<!-- Mobile offcanvas nav -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="mobileNav">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title">Menu</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body">
+    <a class="d-block mb-2" href="#collections" data-bs-dismiss="offcanvas">Collections</a>
+    <a class="d-block mb-2" href="#segments" data-bs-dismiss="offcanvas">Segments</a>
+    <a class="d-block mb-2" href="#sustainability" data-bs-dismiss="offcanvas">Sustainability</a>
+    <a class="d-block mb-2" href="#design" data-bs-dismiss="offcanvas">Design</a>
+    <a class="d-block mb-3" href="#stories" data-bs-dismiss="offcanvas">Inspiration</a>
+    <a class="btn btn-dark w-100" href="#contact" data-bs-dismiss="offcanvas">Order Samples</a>
+  </div>
+</div>
+
+<!-- HERO CAROUSEL -->
+<header id="hero" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5200">
   <div class="carousel-inner">
-    <!-- Slide 1 -->
     <div class="carousel-item active">
-      <div class="hero-slide" style="background:url('assets/img/hero_main.jpg') center/cover no-repeat;">
-        <div class="container">
+      <div class="hero-slide" style="background-image:url('assets/img/hero_main.jpg');">
+        <div class="container-xl">
+          <div class="eyebrow mb-2">Carpet Tile · Singapore</div>
           <h1 class="hero-title mb-3">Lasting Impressions</h1>
-          <p class="lead mb-4">Made to inspire. Made to last. Made for more.</p>
-          <a href="#collections" class="btn btn-cta">Explore Collections</a>
+          <p class="lead mb-4">Design-led surfaces with commercial-grade performance.</p>
+          <a class="btn btn-cta" href="#collections">Explore Collections</a>
         </div>
       </div>
     </div>
-    <!-- Slide 2 -->
     <div class="carousel-item">
-      <div class="hero-slide" style="background:url('assets/img/Gallery-22.png') center/cover no-repeat;">
-        <div class="container">
+      <div class="hero-slide" style="background-image:url('assets/img/hero_alt_1.jpg');">
+        <div class="container-xl">
+          <div class="eyebrow mb-2">Workplace · Education · Healthcare</div>
           <h1 class="hero-title mb-3">Design with Purpose</h1>
-          <p class="lead mb-4">Textures, tones, and patterns that elevate every interior.</p>
-          <a href="#design" class="btn btn-outline-light">See Design Tools</a>
+          <p class="lead mb-4">Textures, tones and patterns for the spaces that matter.</p>
+          <a class="btn btn-outline-light" href="#segments">View Segments</a>
         </div>
       </div>
     </div>
-    <!-- Slide 3 -->
     <div class="carousel-item">
-      <div class="hero-slide" style="background:url('assets/img/Gallery-20.png') center/cover no-repeat;">
-        <div class="container">
-          <h1 class="hero-title mb-3">Performance You Can Feel</h1>
-          <p class="lead mb-4">Commercial-grade durability. Residential-grade comfort.</p>
-          <a href="#contact" class="btn btn-cta">Request Samples</a>
+      <div class="hero-slide" style="background-image:url('assets/img/hero_alt_2.jpg');">
+        <div class="container-xl">
+          <div class="eyebrow mb-2">Circular thinking</div>
+          <h1 class="hero-title mb-3">Sustainability in Action</h1>
+          <p class="lead mb-4">Durable materials. Responsible choices.</p>
+          <a class="btn btn-cta" href="#sustainability">See our approach</a>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Controls -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev" aria-label="Previous">
-    <span class="carousel-control-prev-icon"></span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next" aria-label="Next">
-    <span class="carousel-control-next-icon"></span>
-  </button>
+  <button class="carousel-control-prev" type="button" data-bs-target="#hero" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+  <button class="carousel-control-next" type="button" data-bs-target="#hero" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
 </header>
 
-<!-- COLLECTIONS CAROUSEL -->
-<section id="collections" class="section bg-white">
-  <div class="container reveal">
+<!-- FEATURED COLLECTIONS (jumbo tiles like Interface/Shaw) -->
+<section id="collections" class="section">
+  <div class="container-xl reveal">
     <div class="d-flex align-items-end justify-content-between mb-4">
       <div>
-        <h2 class="section-title mb-1">Carpet Tile Collections</h2>
-        <div class="text-muted">Timeless design. Commercial-grade performance.</div>
+        <div class="eyebrow">Collections</div>
+        <h2 class="section-title mb-1">Featured Carpet Tiles</h2>
+        <div class="text-muted">Timeless design, made to perform.</div>
       </div>
-      <a href="#contact" class="link-offset-2 link-underline link-underline-opacity-0 link-arrow d-none d-md-inline">Request samples</a>
+      <a class="link-dark text-decoration-none" href="#contact">Request brochures →</a>
     </div>
 
-    <div id="collectionsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="6800">
-      <div class="carousel-inner">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-heritage.jpg')">
+          <!-- feature-heritage.jpg: large lifestyle -->
+          <div class="content">
+            <h3>Heritage Threads</h3>
+            <p class="mb-3">Classic tactility, contemporary palettes.</p>
+            <span class="btn btn-light btn-sm rounded-pill">View / sample</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-6">
+        <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-modern.jpg')">
+          <div class="content">
+            <h3>Modern Weave</h3>
+            <p class="mb-3">Clean geometry for crisp layouts.</p>
+            <span class="btn btn-light btn-sm rounded-pill">View / sample</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-4">
+        <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-earthen.jpg')">
+          <div class="content">
+            <h3>Earthen Elegance</h3>
+            <span class="btn btn-light btn-sm rounded-pill mt-2">View / sample</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-4">
+        <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-linear.jpg')">
+          <div class="content">
+            <h3>Linear / Striated</h3>
+            <span class="btn btn-light btn-sm rounded-pill mt-2">Explore</span>
+          </div>
+        </a>
+      </div>
+      <div class="col-lg-4">
+        <a class="feature-card d-block" href="#contact" style="background-image:url('assets/img/feature-peranakan.jpg')">
+          <div class="content">
+            <h3>Peranakan (Soon)</h3>
+            <span class="btn btn-light btn-sm rounded-pill mt-2">Notify me</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- Slide A -->
+<!-- SEGMENTS (like “Markets” pages) -->
+<section id="segments" class="section" style="background:var(--cream)">
+  <div class="container-xl reveal">
+    <div class="d-flex align-items-end justify-content-between mb-4">
+      <div>
+        <div class="eyebrow">Segments</div>
+        <h2 class="section-title mb-1">Solutions by Space</h2>
+        <div class="text-muted">Made for the way you work, learn and heal.</div>
+      </div>
+      <a class="link-dark text-decoration-none" href="#contact">Ask a segment specialist →</a>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <article class="seg-card">
+          <div class="ratio ratio-4x3"><img src="assets/img/seg-workplace.jpg" class="w-100 h-100 object-fit-cover" alt="Workplace"></div>
+          <div class="p-3">
+            <h5 class="mb-1">Workplace</h5>
+            <p class="mb-2 text-muted">Zoning, acoustics, resilience.</p>
+            <a href="#contact" class="link-dark text-decoration-none">Discuss →</a>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <article class="seg-card">
+          <div class="ratio ratio-4x3"><img src="assets/img/seg-education.jpg" class="w-100 h-100 object-fit-cover" alt="Education"></div>
+          <div class="p-3">
+            <h5 class="mb-1">Education</h5>
+            <p class="mb-2 text-muted">Durable, easy to maintain.</p>
+            <a href="#contact" class="link-dark text-decoration-none">Discuss →</a>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <article class="seg-card">
+          <div class="ratio ratio-4x3"><img src="assets/img/seg-healthcare.jpg" class="w-100 h-100 object-fit-cover" alt="Healthcare"></div>
+        <div class="p-3">
+            <h5 class="mb-1">Healthcare</h5>
+            <p class="mb-2 text-muted">Comfort + performance.</p>
+            <a href="#contact" class="link-dark text-decoration-none">Discuss →</a>
+          </div>
+        </article>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <article class="seg-card">
+          <div class="ratio ratio-4x3"><img src="assets/img/seg-hospitality.jpg" class="w-100 h-100 object-fit-cover" alt="Hospitality"></div>
+          <div class="p-3">
+            <h5 class="mb-1">Hospitality</h5>
+            <p class="mb-2 text-muted">Warmth, tone, durability.</p>
+            <a href="#contact" class="link-dark text-decoration-none">Discuss →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY BAND -->
+<section id="sustainability" class="section">
+  <div class="container-xl reveal">
+    <div class="row g-4 align-items-center sust p-4 p-md-5">
+      <div class="col-lg-5">
+        <div class="eyebrow mb-2">Sustainability</div>
+        <h2 class="section-title mb-3">Design better, build responsibly.</h2>
+        <p class="text-muted mb-4">From recycled content to end-of-life take-back, our products are engineered with longevity and circularity in mind.</p>
+        <a href="#contact" class="btn btn-dark rounded-pill">Get documentation</a>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">35%</div><div class="small text-muted">Recycled content*</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">≤ VOC</div><div class="small text-muted">Low emissions</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">Take-back</div><div class="small text-muted">Program ready</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">7-yr</div><div class="small text-muted">Commercial warranty</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">Acoustic</div><div class="small text-muted">Improved dB</div></div></div>
+          <div class="col-6 col-md-4"><div class="metric p-3 text-center"><div class="h3 mb-0">Slip</div><div class="small text-muted">R10 / R11 options</div></div></div>
+        </div>
+        <div class="small text-muted mt-2">*Varies by collection and batch. Request spec sheets.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN TOOLS PROMO -->
+<section id="design" class="section" style="background:var(--cream)">
+  <div class="container-xl reveal">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <div class="eyebrow mb-2">Design Tools</div>
+        <h2 class="section-title mb-3">Imagine the flooring possibilities</h2>
+        <p class="text-muted mb-4">Try herringbone, monolithic or quarter-turn patterns. We’ll advise on transitions, underlays and site conditions for a flawless install.</p>
+        <div class="d-flex gap-2">
+          <a href="#contact" class="btn btn-dark rounded-pill">Talk to a designer</a>
+          <a href="#contact" class="btn btn-outline-dark rounded-pill">Request palette board</a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <img src="assets/img/design-tools.jpg" class="img-fluid rounded-4 shadow" alt="Design tools mock">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSPIRATION STORIES (slider-like, using carousel of cards) -->
+<section id="stories" class="section pt-0">
+  <div class="container-xl reveal">
+    <div class="d-flex align-items-end justify-content-between mb-4">
+      <div>
+        <div class="eyebrow">Inspiration</div>
+        <h2 class="section-title mb-1">Projects & Stories</h2>
+      </div>
+      <div class="d-none d-md-flex gap-2">
+        <button class="btn btn-outline-dark btn-sm" data-bs-target="#storiesCarousel" data-bs-slide="prev" aria-label="Prev"><i class="bi bi-arrow-left"></i></button>
+        <button class="btn btn-outline-dark btn-sm" data-bs-target="#storiesCarousel" data-bs-slide="next" aria-label="Next"><i class="bi bi-arrow-right"></i></button>
+      </div>
+    </div>
+
+    <div id="storiesCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000">
+      <div class="carousel-inner">
         <div class="carousel-item active">
           <div class="row g-4">
             <div class="col-md-4">
-              <article class="card collection-card h-100">
-                <div class="ratio ratio-4x3">
-                  <img src="assets/img/AccentHour_Charcoal_ASH-1_c634x488.webp" class="w-100 h-100 object-fit-cover" alt="Heritage Threads">
-                </div>
-                <div class="card-body">
-                  <h5 class="fw-bold mb-1">Heritage Threads</h5>
-                  <p class="text-secondary">Classic textures reimagined for modern spaces.</p>
-                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+              <article class="story-card h-100">
+                <img src="assets/img/story-01.jpg" class="w-100" alt="">
+                <div class="p-3">
+                  <h5 class="fw-bold">Co-working in Tanjong Pagar</h5>
+                  <p class="text-muted mb-2">Zoning with striated tiles and warm palettes.</p>
+                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
             <div class="col-md-4">
-              <article class="card collection-card h-100">
-                <div class="ratio ratio-4x3">
-                  <img src="assets/img/EarthenForms_Hearth-Gris_Ash_E611-Marble_c634x488.webp" class="w-100 h-100 object-fit-cover" alt="Modern Weave">
-                </div>
-                <div class="card-body">
-                  <h5 class="fw-bold mb-1">Modern Weave</h5>
-                  <p class="text-secondary">Bold pattern with timeless proportion.</p>
-                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+              <article class="story-card h-100">
+                <img src="assets/img/story-02.jpg" class="w-100" alt="">
+                <div class="p-3">
+                  <h5 class="fw-bold">Primary school library</h5>
+                  <p class="text-muted mb-2">Acoustic comfort for quiet corners.</p>
+                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
             <div class="col-md-4">
-              <article class="card collection-card h-100">
-                <div class="ratio ratio-4x3">
-                  <img src="assets/img/Reeling_Sapphire_Level Set_Cool Polished Cement_ND_c960x960.webp" class="w-100 h-100 object-fit-cover" alt="Earthen Elegance">
-                </div>
-                <div class="card-body">
-                  <h5 class="fw-bold mb-1">Earthen Elegance</h5>
-                  <p class="text-secondary">Organic tones for warm, welcoming interiors.</p>
-                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+              <article class="story-card h-100">
+                <img src="assets/img/story-03.jpg" class="w-100" alt="">
+                <div class="p-3">
+                  <h5 class="fw-bold">Clinic reception</h5>
+                  <p class="text-muted mb-2">Hygienic surfaces, calm textures.</p>
+                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
           </div>
         </div>
 
-        <!-- Slide B -->
         <div class="carousel-item">
           <div class="row g-4">
             <div class="col-md-4">
-              <article class="card collection-card h-100">
-                <div class="ratio ratio-4x3">
-                  <img src="assets/img/alpha-numeric.jpg" class="w-100 h-100 object-fit-cover" alt="Alpha Numeric">
-                </div>
-                <div class="card-body">
-                  <h5 class="fw-bold mb-1">Alpha Numeric <span class="text-muted fw-normal">SGT808</span></h5>
-                  <p class="text-secondary">Crisp geometry for modern zoning.</p>
-                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+              <article class="story-card h-100">
+                <img src="assets/img/story-04.jpg" class="w-100" alt="">
+                <div class="p-3">
+                  <h5 class="fw-bold">Retail concept</h5>
+                  <p class="text-muted mb-2">Directional layouts to guide flow.</p>
+                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
             <div class="col-md-4">
-              <article class="card collection-card h-100">
-                <div class="ratio ratio-4x3">
-                  <img src="assets/img/checks.jpg" class="w-100 h-100 object-fit-cover" alt="Checks">
-                </div>
-                <div class="card-body">
-                  <h5 class="fw-bold mb-1">Checks <span class="text-muted fw-normal">SGT705</span></h5>
-                  <p class="text-secondary">Soft plaid that layers with neutrals.</p>
-                  <a class="btn btn-sm btn-outline-dark rounded-pill" href="#contact">View / sample</a>
+              <article class="story-card h-100">
+                <img src="assets/img/story-05.jpg" class="w-100" alt="">
+                <div class="p-3">
+                  <h5 class="fw-bold">Hospitality lounge</h5>
+                  <p class="text-muted mb-2">Warm tones, easy maintenance.</p>
+                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
             <div class="col-md-4">
-              <article class="card collection-card h-100">
-                <div class="ratio ratio-4x3 position-relative">
-                  <img src="assets/img/peranakan.jpg" class="w-100 h-100 object-fit-cover" alt="Peranakan">
-                  <span class="badge badge-soon position-absolute top-0 start-0 m-2 px-3 py-2 rounded-pill">COMING SOON</span>
-                </div>
-                <div class="card-body">
-                  <h5 class="fw-bold mb-1">Peranakan <span class="text-muted fw-normal">SGT901/902/903</span></h5>
-                  <p class="text-secondary">Heritage motifs with a modern build.</p>
-                  <button class="btn btn-sm btn-outline-dark rounded-pill" disabled>Preview soon</button>
+              <article class="story-card h-100">
+                <img src="assets/img/story-06.jpg" class="w-100" alt="">
+                <div class="p-3">
+                  <h5 class="fw-bold">Meeting suite</h5>
+                  <p class="text-muted mb-2">Premium, quiet underfoot.</p>
+                  <a href="#contact" class="link-dark text-decoration-none">Get the look →</a>
                 </div>
               </article>
             </div>
@@ -223,69 +474,16 @@
         </div>
 
       </div>
-
-      <button class="carousel-control-prev" type="button" data-bs-target="#collectionsCarousel" data-bs-slide="prev" aria-label="Prev">
-        <span class="carousel-control-prev-icon"></span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#collectionsCarousel" data-bs-slide="next" aria-label="Next">
-        <span class="carousel-control-next-icon"></span>
-      </button>
     </div>
   </div>
-</section>
-
-<!-- DESIGN / INSPIRATION -->
-<section id="design" class="section" style="background:var(--sg-cream);">
-  <div class="container reveal">
-    <div class="row g-4 align-items-center">
-      <div class="col-lg-6">
-        <h2 class="section-title mb-3">Imagine the flooring possibilities</h2>
-        <p class="text-secondary mb-4">
-          Start with palette boards, then explore pattern sets—herringbone, monolithic, quarter-turn.
-          Our team advises on underlays, transitions, and site conditions for a flawless install.
-        </p>
-        <a href="#contact" class="btn btn-dark rounded-pill">Talk to a designer</a>
-      </div>
-      <div class="col-lg-6">
-        <img src="assets/img/floor-design-tool-homepage-mockup_c960x960.avif" class="img-fluid rounded-4 shadow" alt="Design tools mock">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GALLERY WITH LIGHTBOX -->
-<section id="gallery" class="section pt-0">
-  <div class="container reveal">
-    <h2 class="section-title mb-4">Gallery</h2>
-    <div class="row g-3">
-      <!-- 8 examples; duplicate/change as needed -->
-      <div class="col-6 col-md-3"><img src="assets/img/gallery-01.jpg" class="img-fluid w-100" alt="Install 1" data-bs-toggle="modal" data-bs-target="#lb1"></div>
-      <div class="col-6 col-md-3"><img src="assets/img/gallery-02.jpg" class="img-fluid w-100" alt="Install 2" data-bs-toggle="modal" data-bs-target="#lb2"></div>
-      <div class="col-6 col-md-3"><img src="assets/img/gallery-03.jpg" class="img-fluid w-100" alt="Install 3" data-bs-toggle="modal" data-bs-target="#lb3"></div>
-      <div class="col-6 col-md-3"><img src="assets/img/gallery-04.jpg" class="img-fluid w-100" alt="Install 4" data-bs-toggle="modal" data-bs-target="#lb4"></div>
-      <div class="col-6 col-md-3"><img src="assets/img/gallery-05.jpg" class="img-fluid w-100" alt="Install 5" data-bs-toggle="modal" data-bs-target="#lb5"></div>
-      <div class="col-6 col-md-3"><img src="assets/img/gallery-06.jpg" class="img-fluid w-100" alt="Install 6" data-bs-toggle="modal" data-bs-target="#lb6"></div>
-      <div class="col-6 col-md-3"><img src="assets/img/gallery-07.jpg" class="img-fluid w-100" alt="Install 7" data-bs-toggle="modal" data-bs-target="#lb7"></div>
-      <div class="col-6 col-md-3"><img src="assets/img/gallery-08.jpg" class="img-fluid w-100" alt="Install 8" data-bs-toggle="modal" data-bs-target="#lb8"></div>
-    </div>
-  </div>
-
-  <!-- Lightbox modals -->
-  <div class="modal fade" id="lb1" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-01.jpg" class="rounded-3" alt=""></div></div></div>
-  <div class="modal fade" id="lb2" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-02.jpg" class="rounded-3" alt=""></div></div></div>
-  <div class="modal fade" id="lb3" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-03.jpg" class="rounded-3" alt=""></div></div></div>
-  <div class="modal fade" id="lb4" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-04.jpg" class="rounded-3" alt=""></div></div></div>
-  <div class="modal fade" id="lb5" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-05.jpg" class="rounded-3" alt=""></div></div></div>
-  <div class="modal fade" id="lb6" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-06.jpg" class="rounded-3" alt=""></div></div></div>
-  <div class="modal fade" id="lb7" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-07.jpg" class="rounded-3" alt=""></div></div></div>
-  <div class="modal fade" id="lb8" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content border-0 bg-transparent"><img src="assets/img/gallery-08.jpg" class="rounded-3" alt=""></div></div></div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="section" style="background:#15181b;">
-  <div class="container text-white reveal">
+  <div class="container-xl text-white reveal">
     <div class="row g-4">
       <div class="col-lg-6">
+        <div class="eyebrow mb-2 text-secondary">Contact</div>
         <h2 class="section-title mb-3">Get in touch</h2>
         <p class="text-light">Samples, quotes, technical specs — we’ve got you.</p>
         <div class="d-grid gap-2 mt-4">
@@ -316,20 +514,92 @@
               <button class="btn btn-cta" type="button">Send enquiry</button>
             </div>
           </div>
-          <div class="form-text mt-2">* Wire this to your backend, Formspree, or Netlify Forms.</div>
+          <div class="form-text mt-2 text-muted">* Wire this to your backend, Formspree, or Netlify Forms.</div>
         </form>
       </div>
     </div>
   </div>
 </section>
 
+<!-- Sticky CTA -->
+<div class="sticky-cta">
+  <a href="#contact" class="btn btn-dark btn-lg rounded-pill"><i class="bi bi-box-seam me-2"></i>Order Samples</a>
+</div>
+
+<!-- SEARCH OVERLAY -->
+<div class="search-overlay">
+  <div class="search-panel mx-3 mx-md-auto">
+    <div class="d-flex align-items-center gap-2 mb-3">
+      <i class="bi bi-search"></i>
+      <input type="search" class="form-control form-control-lg border-0" placeholder="Search collections, segments, specs…" autofocus>
+      <button class="btn btn-outline-dark" id="closeSearch" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="row g-3 small text-muted">
+      <div class="col-md-4">
+        <div class="fw-semibold">Popular searches</div>
+        <ul class="mt-2 mb-0 ps-3">
+          <li>Linear tiles</li><li>Acoustic backing</li><li>R10 slip rating</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="fw-semibold">Segments</div>
+        <ul class="mt-2 mb-0 ps-3">
+          <li>Workplace</li><li>Education</li><li>Healthcare</li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="fw-semibold">Downloads</div>
+        <ul class="mt-2 mb-0 ps-3">
+          <li>Spec sheets</li><li>Maintenance</li><li>Brochures</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- FOOTER -->
-<footer class="py-4">
-  <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
-    <div>© <span id="year"></span> Stitches & Gauge. All rights reserved.</div>
-    <div class="d-flex gap-3">
-      <a class="text-decoration-none text-secondary" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-      <a class="text-decoration-none text-secondary" href="https://www.facebook.com/" target="_blank" rel="noopener">Facebook</a>
+<footer class="py-5">
+  <div class="container-xl">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5 class="fw-bold">Stitches & Gauge</h5>
+        <p class="text-secondary">Design-led carpet tiles for modern interiors across Singapore & Malaysia.</p>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="fw-semibold mb-2">Explore</div>
+        <ul class="list-unstyled small">
+          <li><a href="#collections">Collections</a></li>
+          <li><a href="#segments">Segments</a></li>
+          <li><a href="#stories">Inspiration</a></li>
+          <li><a href="#sustainability">Sustainability</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-2">
+        <div class="fw-semibold mb-2">Support</div>
+        <ul class="list-unstyled small">
+          <li><a href="#contact">Spec sheets</a></li>
+          <li><a href="#contact">Cleaning & care</a></li>
+          <li><a href="#contact">Warranty</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <div class="fw-semibold mb-2">Stay in the loop</div>
+        <form class="d-flex gap-2">
+          <input class="form-control" type="email" placeholder="Email address">
+          <button class="btn btn-light">Join</button>
+        </form>
+        <div class="mt-3 d-flex gap-3">
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="my-4" />
+    <div class="d-flex flex-column flex-md-row justify-content-between small text-secondary">
+      <div>© <span id="year"></span> Stitches & Gauge. All rights reserved.</div>
+      <div class="d-flex gap-3">
+        <a href="#">Privacy</a><a href="#">Terms</a>
+      </div>
     </div>
   </div>
 </footer>
@@ -339,14 +609,24 @@
   // Footer year
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // Light scroll-reveal
+  // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const onScroll = () => {
-    const trigger = window.scrollY + window.innerHeight * 0.85;
+    const trigger = window.scrollY + window.innerHeight * .85;
     reveals.forEach(el => { if (el.offsetTop < trigger) el.classList.add('show'); });
   };
   document.addEventListener('scroll', onScroll, {passive:true});
   window.addEventListener('load', onScroll);
+
+  // Search overlay
+  const body = document.body;
+  const openers = [document.getElementById('btnSearch'), document.getElementById('btnSearchDesktop')].filter(Boolean);
+  const closer = document.getElementById('closeSearch');
+  openers.forEach(btn => btn.addEventListener('click', ()=> body.classList.add('search-open')));
+  closer.addEventListener('click', ()=> body.classList.remove('search-open'));
+  document.querySelector('.search-overlay').addEventListener('click', (e)=> {
+    if(e.target.classList.contains('search-overlay')) body.classList.remove('search-open');
+  });
 </script>
 </body>
 </html>
